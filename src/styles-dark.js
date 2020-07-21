@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 
-export const textColorDark = '#e0e0e0';
-export const bgDark = '#0e0e0e';
+import { textColorLight } from './styles-light';
+export const textColorDark = '#B2B2B2';
+export const bgDark = '#080B1A';
 
 export default darkTheme = StyleSheet.create({
   container: {
@@ -52,10 +53,40 @@ export default darkTheme = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 22,
-    color: textColorDark,
+    color: '#f0f0f0',
   },
   cardTemp: {
     fontSize: 32,
+    color: '#f0f0f0',
+  },
+  // InfoCard
+  infoWrapper: {
+    width: '100%',
+    backgroundColor: '#707070',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 20
+  },
+  infoLine: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  infoBlock: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 150,
+    height: 80,
+    padding: 30,
+  },
+  infoTextInfoTitle: {
+    fontSize: 20,
+    color: textColorDark,
+  },
+  infoTextInfo: {
+    fontSize: 15,
     color: textColorDark,
   },
 });
