@@ -63,7 +63,7 @@ export default lightTheme = StyleSheet.create({
   // InfoCard
   infoWrapper: {
     width: '100%',
-    backgroundColor: '#808080',
+    backgroundColor: '#606060',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20

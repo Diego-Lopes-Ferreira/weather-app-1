@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Switch, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 import MainCard from './src/main-card';
@@ -28,7 +28,7 @@ export default function App() {
       <View style={styles.refresh}>
         <TouchableOpacity
           onPress={() => {
-            setDarkThemeOn(!darkThemeOn)
+            //setDarkThemeOn(!darkThemeOn)
           }}
         >
           <Feather
@@ -74,13 +74,27 @@ export default function App() {
           weather={'clear'}
           color={'#f0f0f0'}
           temp={'32'}
-          bg={darkThemeOn ? '#38b7b8' :  '#008081'}
+          bg={darkThemeOn ? '#38b7b8' : '#008081'}
         />
       </View>
       <View style={{ padding: 30, width: '100%' }}>
         <InfoCard
           info={infoEX}
           styles={styles}
+        />
+      </View>
+      <View style={{ flexDirection: 'row' }}>
+        <Feather
+          name={darkThemeOn ? 'sun' : 'moon'}
+          size={32}
+          color={darkThemeOn ? '#ffffff' : '#000000'}
+        />
+        <Switch
+          trackColor={{ false: "#000000", true: "#ffffff" }}
+          thumbColor={"#aaaaaa"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={() => { setDarkThemeOn(!darkThemeOn) }}
+          value={darkThemeOn}
         />
       </View>
     </View>
