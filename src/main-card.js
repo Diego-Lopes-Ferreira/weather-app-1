@@ -23,7 +23,7 @@ const nightIcons = {
 
 // Seleciona o icone
 function byType(weatherType, data) {
-  switch(weatherType) {
+  switch (weatherType) {
     case 'clear':
       return data.clear
     case 'rainSmall':
@@ -36,21 +36,21 @@ function byType(weatherType, data) {
 }
 
 export default function MainCard({
-    title = 'Morning',
-    type='morning',
-    weather='clear',
-    color = '#ffbb00',
-    temp = '32',
-    styles,
-    bg
-  }) {
+  title = 'Morning',
+  type = 'morning',
+  weather = 'clear',
+  color = '#ffbb00',
+  temp = '32',
+  styles,
+  bg
+}) {
 
   const [icon, setIcon] = useState('sun');
   const [temperature, setTemperature] = useState('32');
-  
+
   useEffect(() => {
     // Seleciona o tipo, e chama a selecao de icone
-    switch(type) {
+    switch (type) {
       case 'morning':
         setIcon(byType(weather, morningIcons))
         break
@@ -72,7 +72,10 @@ export default function MainCard({
         size={50}
         color={color}
       />
-      <Text style={styles.cardTemp}>{temperature}°</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={styles.cardTemp}>{temperature}</Text>
+        <Text style={[styles.tempTypeText, { color: '#ffffff'}]}>°C</Text>
+      </View>
     </View>
   );
 }
@@ -87,7 +90,7 @@ export default function MainCard({
 
 
   cloud-drizzle, cloud-lightning
-  
+
   sun
 
 */

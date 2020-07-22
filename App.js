@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Switch, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Switch, View, ScrollView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
+import darkTheme from './src/styles-dark';
+import lightTheme from './src/styles-light';
+
+import ReloadButton from './src/reload-button';
+import TopCard from './src/top-card';
 import MainCard from './src/main-card';
 import InfoCard from './src/info-card';
-import darkTheme, { bgDark, textColorDark } from './src/styles-dark';
-import lightTheme, { bgLight, textColorLight } from './src/styles-light';
 
 export default function App() {
   const [darkThemeOn, setDarkThemeOn] = useState(false);
-  const [currentTemperature, setCurrentTemperature] = useState('32');
-  const [location, setLocation] = useState('Ourinhos, SP, Brasil');
   const [styles, setStyles] = useState('');
+  
+  const [location, setLocation] = useState('Ourinhos, SP, Brasil');
   const [time, setTime] = useState('14:00');
+
+  const [currentTemperature, setCurrentTemperature] = useState('32');
+  const [windSpeed, setWindSpeed] = useState('');
+  const [umidity, setUmidity] = useState('');
+  const [tempMin, setTempMin] = useState('');
+  const [tempMax, setTempMax] = useState('');
   const [weatherType, setWeatherType] = useState('wind');
+
 
   useEffect(() => {
     darkThemeOn ? setStyles(darkTheme) : setStyles(lightTheme);
@@ -25,28 +35,15 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style={darkThemeOn ? 'light' : 'dark'} />
       {/* Refresh Button */}
-      <View style={styles.refresh}>
-        <TouchableOpacity
-          onPress={() => {
-            //setDarkThemeOn(!darkThemeOn)
-          }}
-        >
-          <Feather
-            name='refresh-ccw'
-            size={22}
-            color={darkThemeOn ? textColorDark : textColorLight}
-          />
-        </TouchableOpacity>
-      </View>
+      <ReloadButton darkThemeOn={darkThemeOn} func={() => { }} styles={styles} />
       {/* Top info */}
-      <View style={styles.temperatureWrapper}>
-        <Feather name={iconByType(weatherType)} size={40} color={colorByType(weatherType)} />
-        <View style={styles.temperature}>
-          <Text style={styles.tempText}>{currentTemperature}</Text>
-          <Text style={styles.tempTypeText}>°C</Text>
-        </View>
-        <Text style={styles.tempTypeText}>{location}, {time}</Text>
-      </View>
+      <TopCard
+        styles={styles}
+        weatherType={weatherType}
+        currentTemperature={currentTemperature}
+        location={location}
+        time={time}
+      />
       {/* Cards */}
       <View style={styles.cards}>
         <MainCard
@@ -106,47 +103,4 @@ const infoEX = {
   umidity: '32',
   tempMin: '32',
   tempMax: '32',
-}
-// Seleciona o icone
-function iconByType(weatherType) {
-  const topIcons = {
-    morningClear: 'sun',
-    nightClear: 'moon',
-    rainSmall: 'cloud-drizzle',
-    rainBig: 'cloud-lightning',
-    wind: 'wind',
-  }
-  switch (weatherType) {
-    case 'clearM':
-      return topIcons.morningClear
-    case 'clearN':
-      return topIcons.nightClear
-    case 'rainSmall':
-      return topIcons.rainSmall
-    case 'rainBig':
-      return topIcons.rainBig
-    case 'wind':
-      return topIcons.wind
-  }
-}
-function colorByType(weatherType) {
-  const topIcons = {
-    morningClear: '#ffff00',
-    nightClear: '#ffffff',
-    rainSmall: '#aaaaaa',
-    rainBig: '#f0f0f0',
-    wind: '#a0a0a0',
-  }
-  switch (weatherType) {
-    case 'clearM':
-      return topIcons.morningClear
-    case 'clearN':
-      return topIcons.nightClear
-    case 'rainSmall':
-      return topIcons.rainSmall
-    case 'rainBig':
-      return topIcons.rainBig
-    case 'wind':
-      return topIcons.wind
-  }
 }

@@ -2,9 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 
-import { textColorLight } from './styles-light';
-export const textColorDark = '#B2B2B2';
-export const bgDark = '#080B1A';
+import { textColorLight, textColorDark, bgDark, bgLight } from './colors';
 
 export default darkTheme = StyleSheet.create({
   container: {
