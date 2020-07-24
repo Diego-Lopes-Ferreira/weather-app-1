@@ -1,6 +1,19 @@
 import React from 'react';
 import * as Location from 'expo-location';
 
+import { key } from './api-key.json';
+/*
+  I'm using the open weather API
+  https://openweathermap.org/api
+
+  Save your free key on a api-key.json
+  '''
+    {
+      "key": "your key"
+    }
+  '''
+*/
+
 const axios = require('axios');
 
 export async function fetchLocation() {
@@ -16,8 +29,8 @@ export default async function getWeatherFromApi(locationCoords) {
   let lat = locationCoords.coords.latitude;
   let lon = locationCoords.coords.longitude;
   let result = {}
-  //api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={c89070c65ad2824ddef797cb2f0e8028}
-  await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=c89070c65ad2824ddef797cb2f0e8028`)
+  //api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={your key}
+  await axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}`)
     .then((response) => {
       const data = response.data
 
